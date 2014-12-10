@@ -1,0 +1,2 @@
+vertx-lazybones-templates
+=========================
