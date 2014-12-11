@@ -1,3 +1,4 @@
+
 buildscript {
     repositories {
         maven {
@@ -10,6 +11,7 @@ buildscript {
     }
 }
 
+apply from: "gradle/wrapper.gradle"
 apply plugin: "uk.co.cacoethes.lazybones-templates"
 
 lazybones {
@@ -26,3 +28,5 @@ lazybones {
     repositoryUsername = "your_bintray_username"
     repositoryApiKey = "your_bintray_api_key"
 }
+
+
