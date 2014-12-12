@@ -30,7 +30,7 @@ dependencies {
   provided "org.codehaus.groovy:groovy-all:$groovyVersion"
   provided "io.vertx:lang-groovy:$groovyLangModVersion@jar"
   provided "io.vertx:mod-web-server:2.0.0-final@jar"
-  compile 'com.github.bangroot.vertx:vertx-utils:1.0.1'
+  compile 'com.github.bangroot.vertx:vertx-utils:1.1'
 
   testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
   testCompile 'cglib:cglib-nodep:3.1'

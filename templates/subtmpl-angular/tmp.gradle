@@ -1,0 +1,87 @@
+apply plugin: 'compass'
+apply plugin: "com.eriwen.gradle.js"
+apply plugin: 'watch'
+
+
+task watchBackground << {
+  Thread.start({
+    tasks['watch'].execute()
+  })
+}
+
+task copyWeb(type: Copy) {
+  into "build/classes/main/static"
+  from 'src/main/static'
+}
+
+task copyClasses(type: Copy) {
+  into "build/mods/$moduleName"
+  from 'build/classes/main'
+}
+
+clean.dependsOn cleanCompileSass
+minifyJs.dependsOn combineJs
+copyMod.dependsOn copyWeb
+copyMod.dependsOn minifyJs
+copyMod.dependsOn compileSass
+runMod.dependsOn watchSass
+runMod.dependsOn watchBackground
+
+test {
+  /* Configure which tests are included
+  include 'org/foo/**'
+  exclude 'org/boo/**'
+  */
+
+}
+
+compass {
+//  cssDir = file("build/mods/$moduleName/web/css")
+  cssDir = file("build/classes/main/static/css")
+//  cssDir = file("build/mods/$moduleName/static/css")
+  sassDir = file('src/main/sass')
+}
+
+//noinspection GrUnresolvedAccess
+// Declare your sources
+javascript.source {
+  dev {
+    js {
+      srcDir 'src/main/javascript'
+      include "**/*.js"
+    }
+  }
+}
+
+// Configure the built-in task
+combineJs {
+  source = javascript.source.dev.js.files
+  dest = file("build/classes/main/static/js/fake360.js")
+}
+
+minifyJs {
+  source = combineJs
+  dest = file("build/classes/main/static/js/fake360-min.js")
+  sourceMap = file("build/classes/main/static/js/fake360.sourcemap.json")
+  closure {
+    warningLevel = 'DEFAULT'
+  }
+}
+
+watch {
+
+  js {
+    files fileTree(dir: 'src/main/javascript',
+        include: '**/*.js')
+    tasks 'combineJs','minifyJs'
+  }
+  web {
+    files fileTree(dir: 'src/main/static',
+        include: '**/*.html')
+    tasks 'copyWeb'
+  }
+  classes {
+    files fileTree(dir: 'build/classes/main', include: '**/*.*')
+    tasks 'copyClasses'
+  }
+}
