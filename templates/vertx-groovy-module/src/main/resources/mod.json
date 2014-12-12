@@ -1,0 +1,14 @@
+{
+  "main":"groovy:${group}.MainVerticle",
+
+  "description":"",
+  "licenses": [""],
+  "author": "",
+
+  // Optional fields
+  "developers": [""],
+  "keywords": [],
+  "homepage": "http://",
+
+  "auto-redeploy": true
+}
