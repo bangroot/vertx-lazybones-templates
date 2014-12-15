@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "uk.co.cacoethes:lazybones-gradle:1.2.1"
+        classpath "uk.co.cacoethes:lazybones-gradle:1.2.2"
     }
 }
 
@@ -15,6 +15,7 @@ apply from: "gradle/wrapper.gradle"
 apply plugin: "uk.co.cacoethes.lazybones-templates"
 
 lazybones {
+  template "vertx-groovy-module" includes "sass", "angular"
     repositoryName = "<account>/<templates-repo>"
 
     // It's best to pull this information from a gradle.properties file in the

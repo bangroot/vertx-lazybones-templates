@@ -1,4 +1,3 @@
-apply plugin: 'compass'
 apply plugin: "com.eriwen.gradle.js"
 apply plugin: 'watch'
 
@@ -23,8 +22,6 @@ clean.dependsOn cleanCompileSass
 minifyJs.dependsOn combineJs
 copyMod.dependsOn copyWeb
 copyMod.dependsOn minifyJs
-copyMod.dependsOn compileSass
-runMod.dependsOn watchSass
 runMod.dependsOn watchBackground
 
 test {
@@ -35,12 +32,6 @@ test {
 
 }
 
-compass {
-//  cssDir = file("build/mods/$moduleName/web/css")
-  cssDir = file("build/classes/main/static/css")
-//  cssDir = file("build/mods/$moduleName/static/css")
-  sassDir = file('src/main/sass')
-}
 
 //noinspection GrUnresolvedAccess
 // Declare your sources
