@@ -1,0 +1,66 @@
+buildscript {
+
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
+  }
+}
+
+plugins {
+  id 'java'
+  id "groovy"
+  id "jacoco"
+  id 'com.github.johnrengelman.shadow' version '1.2.0'
+  id 'idea'
+}
+
+repositories {
+  mavenLocal()
+  jcenter()
+  mavenCentral()
+  maven {
+    url = 'http://oss.sonatype.org/content/repositories/snapshots/'
+  }
+}
+
+
+dependencies {
+  compile "io.vertx:vertx-core:${vertxVersion}"
+  compile "io.vertx:vertx-lang-groovy:${vertxVersion}"
+  compile 'com.github.bangroot.vertx:vertx-utils:1.2-SNAPSHOT'
+
+  testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+  testCompile 'cglib:cglib-nodep:3.1'
+  testCompile 'org.objenesis:objenesis:2.1'
+}
+
+if (!JavaVersion.current().java8Compatible) {
+  throw new IllegalStateException('''A Haiku:
+                                      |  This needs Java 8,
+                                      |  You are using something else,
+                                      |  Refresh. Try again.'''.stripMargin())
+}
+
+
+shadowJar {
+  classifier = 'fat'
+  manifest {
+    attributes 'Main-Class': 'io.vertx.core.Starter'
+    attributes 'Main-Verticle': "${mainVerticle}"
+  }
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
+  dependencies {
+    exclude(dependency('io.vertx:codegen'))
+    exclude(dependency('junit:junit'))
+    exclude(dependency('org.mvel:mvel2'))
+    exclude(dependency('log4j:log4j'))
+    exclude(dependency('org.slf4j:slf4j-api'))
+  }
+}
+
+apply from: "gradle/wrapper.gradle"
+apply from: "gradle/vertx.gradle"

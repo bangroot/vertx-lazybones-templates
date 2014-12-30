@@ -1,3 +1,14 @@
+buildscript {
+
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "com.eriwen:gradle-js-plugin:1.12.1"
+    classpath 'com.bluepapa32:gradle-watch-plugin:0.1.4'
+  }
+}
+
 apply plugin: "com.eriwen.gradle.js"
 apply plugin: 'watch'
 
@@ -13,25 +24,11 @@ task copyWeb(type: Copy) {
   from 'src/main/static'
 }
 
-task copyClasses(type: Copy) {
-  into "build/mods/$moduleName"
-  from 'build/classes/main'
-}
-
 clean.dependsOn cleanCompileSass
 minifyJs.dependsOn combineJs
 copyMod.dependsOn copyWeb
 copyMod.dependsOn minifyJs
 runMod.dependsOn watchBackground
-
-test {
-  /* Configure which tests are included
-  include 'org/foo/**'
-  exclude 'org/boo/**'
-  */
-
-}
-
 
 //noinspection GrUnresolvedAccess
 // Declare your sources
@@ -70,9 +67,5 @@ watch {
     files fileTree(dir: 'src/main/static',
         include: '**/*.html')
     tasks 'copyWeb'
-  }
-  classes {
-    files fileTree(dir: 'build/classes/main', include: '**/*.*')
-    tasks 'copyClasses'
   }
 }

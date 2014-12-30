@@ -1,0 +1,9 @@
+def runProps = [:]
+vertxSysProps.findAll(/([^\s=]+)=([^\s]+)/) { full, name, value ->  runProps[name] = value }
+task run(type: JavaExec, dependsOn: ['classes']) {
+  classpath sourceSets.main.runtimeClasspath
+  main = "io.vertx.core.Starter"
+  args "run", mainVerticle
+  args vertxArgs.split()
+  systemProperties runProps
+}
