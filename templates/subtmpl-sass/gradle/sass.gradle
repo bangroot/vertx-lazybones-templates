@@ -1,0 +1,21 @@
+buildscript {
+
+  repositories {
+    maven { url 'http://dl.bintray.com/robfletcher/gradle-plugins' }
+  }
+  dependencies {
+    classpath 'org.gradle.plugins:gradle-compass:1.0.10'
+  }
+}
+
+apply plugin: 'compass'
+
+compass {
+//  cssDir = file("build/mods/$moduleName/web/css")
+  cssDir = file("build/classes/main/static/css")
+//  cssDir = file("build/mods/$moduleName/static/css")
+  sassDir = file('src/main/sass')
+}
+
+copyMod.dependsOn compileSass
+runMod.dependsOn watchSass

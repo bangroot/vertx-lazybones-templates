@@ -1,0 +1,71 @@
+buildscript {
+
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath "com.eriwen:gradle-js-plugin:1.12.1"
+    classpath 'com.bluepapa32:gradle-watch-plugin:0.1.4'
+  }
+}
+
+apply plugin: "com.eriwen.gradle.js"
+apply plugin: 'watch'
+
+
+task watchBackground << {
+  Thread.start({
+    tasks['watch'].execute()
+  })
+}
+
+task copyWeb(type: Copy) {
+  into "build/classes/main/static"
+  from 'src/main/static'
+}
+
+clean.dependsOn cleanCompileSass
+minifyJs.dependsOn combineJs
+copyMod.dependsOn copyWeb
+copyMod.dependsOn minifyJs
+runMod.dependsOn watchBackground
+
+//noinspection GrUnresolvedAccess
+// Declare your sources
+javascript.source {
+  dev {
+    js {
+      srcDir 'src/main/javascript'
+      include "**/*.js"
+    }
+  }
+}
+
+// Configure the built-in task
+combineJs {
+  source = javascript.source.dev.js.files
+  dest = file("build/classes/main/static/js/fake360.js")
+}
+
+minifyJs {
+  source = combineJs
+  dest = file("build/classes/main/static/js/fake360-min.js")
+  sourceMap = file("build/classes/main/static/js/fake360.sourcemap.json")
+  closure {
+    warningLevel = 'DEFAULT'
+  }
+}
+
+watch {
+
+  js {
+    files fileTree(dir: 'src/main/javascript',
+        include: '**/*.js')
+    tasks 'combineJs','minifyJs'
+  }
+  web {
+    files fileTree(dir: 'src/main/static',
+        include: '**/*.html')
+    tasks 'copyWeb'
+  }
+}
