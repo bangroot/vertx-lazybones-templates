@@ -1,4 +1,4 @@
-package ${group}
+package ${basePackage}
 
 import io.vertx.lang.groovy.GroovyVerticle;
 import io.vertx.core.logging.Logger

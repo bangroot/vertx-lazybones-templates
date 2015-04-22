@@ -1,4 +1,4 @@
-package ${group}
+package ${basePackage}
 
 import io.vertx.core.logging.Logger
 import io.vertx.core.logging.impl.LoggerFactory

@@ -13,8 +13,10 @@ def defaultGroup = (props.group) ?: "org.example"
 def defaultModName = (props.modName) ?: projectDir.name
 def defaultVersion = (props.version) ?: "1.0-SNAPSHOT"
 def defaultVertxVersion = (props.vertxVersion) ?: "3.0.0-milestone4"
+def defaultPackage = (props.basePackage) ?: defaultGroup
 
-props.group = ask("Define value for 'group' [${defaultGroup}]: ", defaultGroup, "group")
-props.modName = ask("Define value for 'modName' [${defaultModName}]: ", defaultModName, "modName")
-props.version = ask("Define value for 'version' [${defaultVersion}]: ", defaultVersion, "version")
-props.vertxVersion = ask("Define value for 'vertxVersion' [${defaultVertxVersion}]: ", defaultVertxVersion, "vertxVersion")
+props.group = ask("Project group (e.g. maven group id) [${defaultGroup}]: ", defaultGroup, "group")
+props.basePackage = ask("Base package for classes [${defaultPackage}]: ", defaultPackage, "basePackage")
+props.modName = ask("Vertx module name [${defaultModName}]: ", defaultModName, "modName")
+props.version = ask("Initial version [${defaultVersion}]: ", defaultVersion, "version")
+props.vertxVersion = ask("Vert.x version [${defaultVertxVersion}]: ", defaultVertxVersion, "vertxVersion")

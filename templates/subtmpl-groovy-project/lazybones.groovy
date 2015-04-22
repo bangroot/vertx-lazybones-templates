@@ -8,7 +8,7 @@ registerDefaultEngine new SimpleTemplateEngine()
 def props = [:]
 
 props.putAll(parentParams)
-props.mainVerticle = "groovy:${props.group}.MainVerticle"
+props.mainVerticle = "groovy:${props.basePackage}.MainVerticle"
 
 processTemplates "**/*.gtpl", props
 
@@ -18,7 +18,7 @@ new File(projectDir, 'gradlew').setExecutable(true, false)
 
 def templatesToMove = [
 	'gradle.properties.gtpl': 'gradle.properties',
-	'src/main/groovy/MainVerticle.groovy.gtpl': "/src/main/groovy/" + props.group.split("\\.").join("/") + "/MainVerticle.groovy"
+	'src/main/groovy/MainVerticle.groovy.gtpl': "/src/main/groovy/" + props.basePackage.split("\\.").join("/") + "/MainVerticle.groovy"
 ]
 
 templatesToMove.each {from, to ->
