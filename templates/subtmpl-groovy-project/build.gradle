@@ -29,7 +29,6 @@ repositories {
 dependencies {
   compile "io.vertx:vertx-core:${vertxVersion}"
   compile "io.vertx:vertx-lang-groovy:${vertxVersion}"
-  compile 'com.github.bangroot.vertx:vertx-utils:1.2-SNAPSHOT'
 
   testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
   testCompile 'cglib:cglib-nodep:3.1'

@@ -11,11 +11,7 @@ class MainVerticle extends GroovyVerticle {
   private static final Logger _log = LoggerFactory.getLogger(MainVerticle)
 
   void start() {
-    launch{
-      //see DeployExtension
-    }
     _log.info("Started MainVerticle!")
-
   }
 
   void stop() {
