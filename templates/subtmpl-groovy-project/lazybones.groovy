@@ -14,6 +14,8 @@ processTemplates "**/*.gtpl", props
 
 FileUtils.copyDirectory(templateDir, projectDir, or(directoryFileFilter(), and(fileFileFilter(), notFileFilter(suffixFileFilter('.gtpl')), notFileFilter(nameFileFilter('lazybones.groovy')))));
 
+new File(projectDir, 'gradlew').setExecutable(true, false)
+
 def templatesToMove = [
 	'gradle.properties.gtpl': 'gradle.properties',
 	'src/main/groovy/MainVerticle.groovy.gtpl': "/src/main/groovy/" + props.group.split("\\.").join("/") + "/MainVerticle.groovy"
