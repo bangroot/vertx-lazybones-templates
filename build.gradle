@@ -17,7 +17,7 @@ apply plugin: "uk.co.cacoethes.lazybones-templates"
 
 lazybones {
   licenses = ['Apache-2.0']
-  template "vertx3" includes "groovy-project", "groovy-verticle", "add-vertx-util"
+  template "vertx3" includes "groovy-project", "groovy-verticle", "add-vertx-util", "add-web"
     repositoryName = "bangroot/lazybones-templates"
 
     // It's best to pull this information from a gradle.properties file in the

@@ -1,7 +1,7 @@
 package ${basePackage}
 
 import io.vertx.core.logging.Logger
-import io.vertx.core.logging.impl.LoggerFactory
+import io.vertx.core.logging.LoggerFactory
 import io.vertx.lang.groovy.GroovyVerticle
 
 class ${verticleName} extends GroovyVerticle {

@@ -16,4 +16,4 @@ File destFile = new File(destPkg, "${props.verticleName}.groovy")
 File mainVerticle = new File(templateDir, "Verticle.groovy.gtpl")
 log.fine "Moving ${mainVerticle.absolutePath} to ${destFile.absolutePath}"
 mainVerticle.renameTo(destFile)
-log.info "Add the following to your launch in MainVerticle: verticle \"groovy:${props.basePackage}.${props.verticleName}\""
+log.info "Add the following to your deploy in MainVerticle: verticle \"groovy:${props.basePackage}.${props.verticleName}\""

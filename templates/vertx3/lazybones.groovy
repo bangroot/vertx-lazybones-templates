@@ -12,10 +12,10 @@ if (previousProps.exists()) {
 def defaultGroup = (props.group) ?: "org.example"
 def defaultModName = (props.modName) ?: projectDir.name
 def defaultVersion = (props.version) ?: "1.0-SNAPSHOT"
-def defaultVertxVersion = (props.vertxVersion) ?: "3.0.0-milestone4"
-def defaultPackage = (props.basePackage) ?: defaultGroup
+def defaultVertxVersion = (props.vertxVersion) ?: "3.0.0"
 
 props.group = ask("Project group (e.g. maven group id) [${defaultGroup}]: ", defaultGroup, "group")
+def defaultPackage = (props.basePackage) ?: props.group
 props.basePackage = ask("Base package for classes [${defaultPackage}]: ", defaultPackage, "basePackage")
 props.modName = ask("Vertx module name [${defaultModName}]: ", defaultModName, "modName")
 props.version = ask("Initial version [${defaultVersion}]: ", defaultVersion, "version")
